@@ -1,6 +1,7 @@
 .container {
   display: flex;
   height: 100vh;
+  /* background-color: #000000; */
 }
 
 .container--sidebar {
@@ -8,11 +9,12 @@
 }
 
 .container--main {
-  background-color: burlywood;
   flex: 3;
   overflow: auto;
   /* height: 100%; */
   align-items: stretch;
   margin: 5px;
+  border: 1px solid black;
   border-radius: 10px;
+  /* background-color: #121111; */
 }
