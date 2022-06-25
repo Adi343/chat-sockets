@@ -11,7 +11,20 @@ wss.on("connection", function connection(ws) {
     console.log("received: %s", data);
   });
 
-  ws.send("something good from server...");
+  ws.on("close", () => {
+    console.log("Connection closed");
+  });
+
+  let count = 0;
+
+  const interval = setInterval(() => {
+    ws.send("something good from server...");
+    count += 1;
+    if (count >= 10) {
+      clearInterval(interval);
+    }
+    return;
+  }, 1000);
 });
 server.listen(8000, () => {
   console.log("Listening on ws://localhost:8000");
