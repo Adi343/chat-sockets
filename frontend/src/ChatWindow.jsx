@@ -9,6 +9,7 @@ export default function ChatWindow() {
     // });
 
     webSocket.addEventListener("message", function (event) {
+      // console.log("Message from server ", JSON.parse(event.data.text()));
       console.log("Message from server ", event.data);
     });
 
