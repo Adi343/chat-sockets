@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useLayoutEffect } from "react";
 
 export default function ChatWindow() {
+  const [chatData, setChatData] = useState([]);
   useEffect(() => {
     const webSocket = new WebSocket("ws://localhost:8000");
 
@@ -9,8 +10,8 @@ export default function ChatWindow() {
     // });
 
     webSocket.addEventListener("message", function (event) {
-      // console.log("Message from server ", JSON.parse(event.data.text()));
-      console.log("Message from server ", event.data);
+      const data = JSON.parse(event.data);
+      setChatData((arr) => [...arr, data]);
     });
 
     return () => {
@@ -19,8 +20,39 @@ export default function ChatWindow() {
   }, []);
 
   return (
-    <>
+    <div
+      style={{
+        minHeight: "100%",
+        display: "flex",
+        flexDirection: "column",
+        backgroundColor: "#404040",
+      }}
+    >
       <span>This is chat</span>
-    </>
+      {chatData.map((item) => (
+        <div>
+          <span
+            style={{
+              marginLeft: "5px",
+              marginRight: "10px",
+              fontSize: "20px",
+              color: "orange",
+            }}
+          >
+            {item.user}
+          </span>
+          <span
+            key={item.user}
+            style={{
+              marginTop: "5px",
+              marginBottom: "5px",
+              fontSize: "20px",
+            }}
+          >
+            {item.message}
+          </span>
+        </div>
+      ))}
+    </div>
   );
 }

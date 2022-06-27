@@ -1,7 +1,7 @@
 .container {
   display: flex;
   height: 100vh;
-  /* background-color: #000000; */
+  background-color: #272424;
 }
 
 .container--sidebar {
