@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useLayoutEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ChatInput from "./ChatInput";
 
 export default function ChatWindow() {
@@ -24,48 +24,45 @@ export default function ChatWindow() {
     <div
       style={{
         minHeight: "100%",
+        maxHeight: "100%",
         display: "flex",
         flexDirection: "column",
+        justifyItems: "flex-end",
         backgroundColor: "#404040",
       }}
     >
-      <span
-        style={{
-          alignItems: "center",
-        }}
+      {/* <div style={{ display: "flex", justifyContent: "center" }}>
+        <span
+          style={{
+            fontSize: "32px",
+            color: "#900000",
+          }}
+        >
+          REACT CHAT
+        </span>
+      </div> */}
+      <div
+        style={{ flex: "9.75", overflow: "auto", backgroundColor: "#000089" }}
       >
-        This is chat
-      </span>
-      <div style={{ flex: "1" }}>
         {chatData.map((item) => (
           <div
+            key={item.message}
             style={{
               margin: "5px",
             }}
           >
-            <span
-              style={{
-                marginLeft: "5px",
-                marginRight: "10px",
-                fontSize: "20px",
-                color: "orange",
-              }}
-            >
-              {item.user}
-            </span>
-            <span
-              key={item.user}
-              style={{
-                marginTop: "5px",
-                marginBottom: "5px",
-                fontSize: "20px",
-              }}
-            >
+            <span className="userStyle">{item.user}</span>
+            <span key={item.user} className="messageStyle">
               {item.message}
             </span>
           </div>
         ))}
       </div>
+      {/* <div
+      // style={{ flex: "0.25" }}
+      >
+        <ChatInput />
+      </div> */}
       <ChatInput />
     </div>
   );
