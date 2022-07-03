@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useLayoutEffect } from "react";
+import ChatInput from "./ChatInput";
 
 export default function ChatWindow() {
   const [chatData, setChatData] = useState([]);
@@ -28,31 +29,44 @@ export default function ChatWindow() {
         backgroundColor: "#404040",
       }}
     >
-      <span>This is chat</span>
-      {chatData.map((item) => (
-        <div>
-          <span
+      <span
+        style={{
+          alignItems: "center",
+        }}
+      >
+        This is chat
+      </span>
+      <div style={{ flex: "1" }}>
+        {chatData.map((item) => (
+          <div
             style={{
-              marginLeft: "5px",
-              marginRight: "10px",
-              fontSize: "20px",
-              color: "orange",
+              margin: "5px",
             }}
           >
-            {item.user}
-          </span>
-          <span
-            key={item.user}
-            style={{
-              marginTop: "5px",
-              marginBottom: "5px",
-              fontSize: "20px",
-            }}
-          >
-            {item.message}
-          </span>
-        </div>
-      ))}
+            <span
+              style={{
+                marginLeft: "5px",
+                marginRight: "10px",
+                fontSize: "20px",
+                color: "orange",
+              }}
+            >
+              {item.user}
+            </span>
+            <span
+              key={item.user}
+              style={{
+                marginTop: "5px",
+                marginBottom: "5px",
+                fontSize: "20px",
+              }}
+            >
+              {item.message}
+            </span>
+          </div>
+        ))}
+      </div>
+      <ChatInput />
     </div>
   );
 }

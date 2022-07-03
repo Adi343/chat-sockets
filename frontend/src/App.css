@@ -1,3 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@500&family=Monofett&family=Sora:wght@400;600&family=Source+Code+Pro:ital,wght@0,400;1,500&display=swap");
+
+body,
+html {
+  font-family: "Sora", sans-serif;
+}
+
 .container {
   display: flex;
   height: 100vh;
@@ -17,4 +24,19 @@
   border: 1px solid black;
   border-radius: 10px;
   /* background-color: #121111; */
+}
+
+.chat {
+  display: flex;
+  height: 50px;
+  margin: 10px;
+  border: 3px solid black;
+  background-color: black;
+}
+
+.chatBar {
+  flex: 1;
+  font-size: large;
+  color: white;
+  background-color: black;
 }
