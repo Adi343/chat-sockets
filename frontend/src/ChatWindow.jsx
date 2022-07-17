@@ -42,13 +42,19 @@ export default function ChatWindow() {
         </span>
       </div> */}
       <div
-        style={{ flex: "9.75", overflow: "auto", backgroundColor: "#000089" }}
+        style={{
+          flex: "9.75",
+          overflow: "auto",
+          backgroundColor: "#000089",
+          justifyItems: "flex-end",
+        }}
       >
         {chatData.map((item) => (
           <div
             key={item.message}
             style={{
               margin: "5px",
+              alignSelf: "end",
             }}
           >
             <span className="userStyle">{item.user}</span>
