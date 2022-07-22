@@ -12,12 +12,8 @@ export default function ChatWindow() {
       inputRef.current.focus();
       setChat(chatMessage);
       const message = {
-        user: "Admin",
-        message: "Hi!",
-      };
-      let newMessage = {
-        user: "Admin",
-        message: e.target.value,
+        user: "Me",
+        message: chatMessage,
       };
       console.log(`submitChat called! ${JSON.stringify(message)}`);
       setChatData((arr) => [...arr, message]);
@@ -25,7 +21,6 @@ export default function ChatWindow() {
     }
   };
   useEffect(() => {
-    // alert("useEffect fired!");
     const webSocket = new WebSocket("ws://localhost:8000");
 
     // webSocket.addEventListener("open", function (event) {
@@ -71,7 +66,7 @@ export default function ChatWindow() {
           backgroundColor: "#012a4a",
           border: "1px #89c2d9",
           borderRadius: "10px",
-          justifyItems: "flex-end",
+          // justifyItems: "flex-end",
         }}
       >
         {chatData.map((item) => (
