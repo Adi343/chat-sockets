@@ -106,17 +106,6 @@ export default function ChatWindow() {
           // }}
           onKeyDown={submitChat}
         />
-        <button
-          //   onClick={() => {
-          //     inputRef.current.value = "";
-          //     inputRef.current.focus();
-          //     setChatData("");
-          //   }}
-          className="sendChat"
-          onClick={submitChat}
-        >
-          Send
-        </button>
       </div>
     </div>
   );
