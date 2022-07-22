@@ -1,24 +1,47 @@
-import React, { useEffect, useState } from "react";
-import ChatInput from "./ChatInput";
+import React, { useEffect, useState, useRef } from "react";
 
 export default function ChatWindow() {
   const [chatData, setChatData] = useState([]);
+  const [chat, setChat] = useState("");
+  const inputRef = useRef(null);
+
+  const submitChat = (e) => {
+    let chatMessage = e.target.value;
+    if (e.key === "Enter") {
+      inputRef.current.value = "";
+      inputRef.current.focus();
+      setChat(chatMessage);
+      const message = {
+        user: "Admin",
+        message: "Hi!",
+      };
+      let newMessage = {
+        user: "Admin",
+        message: e.target.value,
+      };
+      console.log(`submitChat called! ${JSON.stringify(message)}`);
+      setChatData((arr) => [...arr, message]);
+      setChat("");
+    }
+  };
   useEffect(() => {
+    // alert("useEffect fired!");
+    // alert("chat is ", chat);
     const webSocket = new WebSocket("ws://localhost:8000");
 
     // webSocket.addEventListener("open", function (event) {
     //   webSocket.send("Hello from React!");
     // });
 
-    webSocket.addEventListener("message", function (event) {
-      const data = JSON.parse(event.data);
-      setChatData((arr) => [...arr, data]);
-    });
+    // webSocket.addEventListener("message", function (event) {
+    //   const data = JSON.parse(event.data);
+    //   setChatData((arr) => [...arr, data]);
+    // });
 
-    return () => {
-      webSocket.close();
-    };
-  }, []);
+    // return () => {
+    //   webSocket.close();
+    // };
+  }, [chat]);
 
   return (
     <div
@@ -28,7 +51,9 @@ export default function ChatWindow() {
         display: "flex",
         flexDirection: "column",
         justifyItems: "flex-end",
-        backgroundColor: "#404040",
+        border: "5px #89c2d9",
+        borderRadius: "10px",
+        backgroundColor: "#a9d6e5",
       }}
     >
       {/* <div style={{ display: "flex", justifyContent: "center" }}>
@@ -45,7 +70,9 @@ export default function ChatWindow() {
         style={{
           flex: "9.75",
           overflow: "auto",
-          backgroundColor: "#000089",
+          backgroundColor: "#012a4a",
+          border: "1px #89c2d9",
+          borderRadius: "10px",
           justifyItems: "flex-end",
         }}
       >
@@ -69,7 +96,28 @@ export default function ChatWindow() {
       >
         <ChatInput />
       </div> */}
-      <ChatInput />
+      <div className="chat">
+        <input
+          type="text"
+          className="chatBar"
+          ref={inputRef}
+          // onBlur={(e) => {
+          //   setChat(e.target.value);
+          // }}
+          onKeyDown={submitChat}
+        />
+        <button
+          //   onClick={() => {
+          //     inputRef.current.value = "";
+          //     inputRef.current.focus();
+          //     setChatData("");
+          //   }}
+          className="sendChat"
+          onClick={submitChat}
+        >
+          Send
+        </button>
+      </div>
     </div>
   );
 }
