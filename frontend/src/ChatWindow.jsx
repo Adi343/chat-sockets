@@ -55,16 +55,6 @@ export default function ChatWindow() {
         backgroundColor: "#a9d6e5",
       }}
     >
-      {/* <div style={{ display: "flex", justifyContent: "center" }}>
-        <span
-          style={{
-            fontSize: "32px",
-            color: "#900000",
-          }}
-        >
-          REACT CHAT
-        </span>
-      </div> */}
       <div
         style={{
           display: "grid",
@@ -99,20 +89,12 @@ export default function ChatWindow() {
           </div>
         ))}
       </div>
-      {/* <div
-      // style={{ flex: "0.25" }}
-      >
-        <ChatInput />
-      </div> */}
       <div className="chat">
         <input
           type="text"
           placeholder="Type Message"
           className="chatBar"
           ref={inputRef}
-          // onBlur={(e) => {
-          //   setChat(e.target.value);
-          // }}
           onKeyDown={submitChat}
         />
       </div>
