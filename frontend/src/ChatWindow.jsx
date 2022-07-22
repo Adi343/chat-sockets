@@ -26,21 +26,20 @@ export default function ChatWindow() {
   };
   useEffect(() => {
     // alert("useEffect fired!");
-    // alert("chat is ", chat);
     const webSocket = new WebSocket("ws://localhost:8000");
 
     // webSocket.addEventListener("open", function (event) {
     //   webSocket.send("Hello from React!");
     // });
 
-    // webSocket.addEventListener("message", function (event) {
-    //   const data = JSON.parse(event.data);
-    //   setChatData((arr) => [...arr, data]);
-    // });
+    webSocket.addEventListener("message", function (event) {
+      const data = JSON.parse(event.data);
+      setChatData((arr) => [...arr, data]);
+    });
 
-    // return () => {
-    //   webSocket.close();
-    // };
+    return () => {
+      webSocket.close();
+    };
   }, [chat]);
 
   return (
@@ -66,6 +65,15 @@ export default function ChatWindow() {
           REACT CHAT
         </span>
       </div> */}
+      <div
+        style={{
+          display: "grid",
+          alignContent: "center",
+          justifyContent: "center",
+        }}
+      >
+        <h3>Adithya's Chat</h3>
+      </div>
       <div
         style={{
           flex: "9.75",
@@ -99,6 +107,7 @@ export default function ChatWindow() {
       <div className="chat">
         <input
           type="text"
+          placeholder="Type Message"
           className="chatBar"
           ref={inputRef}
           // onBlur={(e) => {
