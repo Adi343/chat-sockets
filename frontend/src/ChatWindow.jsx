@@ -44,7 +44,7 @@ export default function ChatWindow() {
         maxHeight: "100%",
         display: "flex",
         flexDirection: "column",
-        justifyItems: "flex-end",
+        // justifyItems: "flex-end",
         border: "5px #89c2d9",
         borderRadius: "10px",
         backgroundColor: "#a9d6e5",
@@ -66,23 +66,29 @@ export default function ChatWindow() {
           backgroundColor: "#012a4a",
           border: "1px #89c2d9",
           borderRadius: "10px",
-          // justifyItems: "flex-end",
         }}
       >
-        {chatData.map((item) => (
-          <div
-            key={item.message}
-            style={{
-              margin: "5px",
-              alignSelf: "end",
-            }}
-          >
-            <span className="userStyle">{item.user}</span>
-            <span key={item.user} className="messageStyle">
-              {item.message}
-            </span>
-          </div>
-        ))}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            backgroundColor: "#232132",
+          }}
+        >
+          {chatData.map((item) => (
+            <div
+              key={item.message}
+              style={{
+                margin: "5px",
+              }}
+            >
+              <span className="userStyle">{item.user}</span>
+              <span key={item.user} className="messageStyle">
+                {item.message}
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
       <div className="chat">
         <input
