@@ -4,6 +4,7 @@ export default function ChatWindow() {
   const [chatData, setChatData] = useState([]);
   const [chat, setChat] = useState("");
   const inputRef = useRef(null);
+  const scrollRef = useRef(null);
 
   const submitChat = (e) => {
     let chatMessage = e.target.value;
@@ -30,12 +31,17 @@ export default function ChatWindow() {
     webSocket.addEventListener("message", function (event) {
       const data = JSON.parse(event.data);
       setChatData((arr) => [...arr, data]);
+      scrollRef.current.scrollIntoView({ behavior: "smooth" });
     });
 
     return () => {
       webSocket.close();
     };
   }, [chat]);
+
+  useEffect(() => {
+    scrollRef.current.scrollIntoView({ behavior: "smooth" });
+  }, [chatData]);
 
   return (
     <div
@@ -75,6 +81,11 @@ export default function ChatWindow() {
             backgroundColor: "#232132",
           }}
         >
+          <div
+            style={{
+              minHeight: "100vh",
+            }}
+          />
           {chatData.map((item) => (
             <div
               key={item.message}
@@ -88,6 +99,7 @@ export default function ChatWindow() {
               </span>
             </div>
           ))}
+          <div ref={scrollRef} />
         </div>
       </div>
       <div className="chat">
