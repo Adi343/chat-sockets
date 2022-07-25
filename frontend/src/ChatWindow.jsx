@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 
+const webSocketUrl = process.env.REACT_APP_API;
+
 export default function ChatWindow() {
   const [chatData, setChatData] = useState([]);
   const [chat, setChat] = useState("");
@@ -22,7 +24,7 @@ export default function ChatWindow() {
     }
   };
   useEffect(() => {
-    const webSocket = new WebSocket("ws://localhost:8000");
+    const webSocket = new WebSocket(webSocketUrl);
 
     // webSocket.addEventListener("open", function (event) {
     //   webSocket.send("Hello from React!");
