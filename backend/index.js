@@ -1,8 +1,10 @@
-const { WebSocketServer } = require("ws");
-const { createServer } = require("http");
-const express = require("express");
-const fs = require("fs");
-require("dotenv").config();
+import { WebSocketServer } from "ws";
+import { createServer } from "http";
+import express from "express";
+import fs from "fs";
+import { faker } from "@faker-js/faker";
+import dotenv from "dotenv";
+dotenv.config();
 
 const app = express();
 const server = createServer(app);
@@ -23,7 +25,11 @@ wss.on("connection", function connection(ws) {
   let count = 0;
 
   const interval = setInterval(() => {
-    ws.send(JSON.stringify(data[count]));
+    const message = {
+      user: faker.name.firstName(),
+      message: faker.random.words(),
+    };
+    ws.send(JSON.stringify(message));
     count += 1;
     if (count >= data.length) {
       clearInterval(interval);
