@@ -11,7 +11,8 @@ const server = createServer(app);
 const wss = new WebSocketServer({ server });
 const port = process.env.PORT;
 
-const data = JSON.parse(fs.readFileSync("./data.json"));
+// const data = JSON.parse(fs.readFileSync("./data.json"));
+const data = [];
 
 wss.on("connection", function connection(ws) {
   ws.on("message", function message(data) {
@@ -31,7 +32,7 @@ wss.on("connection", function connection(ws) {
     };
     ws.send(JSON.stringify(message));
     count += 1;
-    if (count >= data.length) {
+    if (count >= 20) {
       clearInterval(interval);
     }
     return;

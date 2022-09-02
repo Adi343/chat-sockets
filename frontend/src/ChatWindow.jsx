@@ -24,20 +24,25 @@ export default function ChatWindow() {
     }
   };
   useEffect(() => {
-    const webSocket = new WebSocket(webSocketUrl);
+    let webSocket;
+    if (webSocketUrl) {
+      webSocket = new WebSocket(webSocketUrl);
 
-    // webSocket.addEventListener("open", function (event) {
-    //   webSocket.send("Hello from React!");
-    // });
+      // webSocket.addEventListener("open", function (event) {
+      //   webSocket.send("Hello from React!");
+      // });
 
-    webSocket.addEventListener("message", function (event) {
-      const data = JSON.parse(event.data);
-      setChatData((arr) => [...arr, data]);
-      scrollRef.current.scrollIntoView({ behavior: "smooth" });
-    });
+      webSocket.addEventListener("message", function (event) {
+        const data = JSON.parse(event.data);
+        setChatData((arr) => [...arr, data]);
+        scrollRef.current.scrollIntoView({ behavior: "smooth" });
+      });
+    }
 
     return () => {
-      webSocket.close();
+      if (webSocketUrl !== undefined) {
+        webSocket.close();
+      }
     };
   }, [chat]);
 
